@@ -178,20 +178,22 @@ class MainViewModel(var app: Application) : AndroidViewModel(app) {
 
     private fun similarList(selectedFacilityId: String, selectedOptionId: String): List<Exclusion>? {
 
-        var ex = ArrayList<Exclusion>()
+        var exclusionList = ArrayList<Exclusion>()
 
-        for (exclusion in netWorkResponseData.value?.exclusions!!) {
-            for (excl in exclusion) {
-                if (excl.facility_id == selectedFacilityId && excl.options_id == selectedOptionId) {
-                    for (exclus in exclusion!!) {
-                        if (exclus.facility_id != selectedFacilityId) {
-                            ex.add(exclus)
+        if (netWorkResponseData.value?.exclusions!!.isNotEmpty()) {
+            for (exclusions in netWorkResponseData.value?.exclusions!!) {
+                for (exclusion in exclusions) {
+                    if (exclusion.facility_id == selectedFacilityId && exclusion.options_id == selectedOptionId) {
+                        for (excl in exclusions!!) {
+                            if (excl.facility_id != selectedFacilityId) {
+                                exclusionList.add(excl)
+                            }
                         }
                     }
                 }
             }
         }
-        return ex
+        return exclusionList
     }
 
     fun updateSelection(isSelected: Boolean, tag: Int) {

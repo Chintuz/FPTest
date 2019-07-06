@@ -63,7 +63,6 @@ class MainAdapter(var viewModel: MainViewModel) : RecyclerView.Adapter<RecyclerV
 
                 for (model in list) {
                     if (list[position].position == model.position) {
-
                         for (ex in model.exclusions!!) {
                             for (mod in list) {
                                 if (mod.facility_id == ex.facility_id && mod.object_id == ex.options_id) {
